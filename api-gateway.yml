@@ -5,6 +5,10 @@ eureka:
   client:
     service-url:
       defaultZone: http://discovery-service:9091/eureka
+  instance:
+    prefer-ip-address: true
+    hostname: ${COMPUTERNAME:localhost}
+
 spring:
   application:
     name: api-gateway
@@ -23,7 +27,7 @@ spring:
         - id: credit-service
           uri: lb://CREDIT-SERVICE
           predicates:
-            - Path=/creditcard/**,/credits/**
+            - Path=/credit/**
           filters:
           - name: SCGWPreFilter
           - name: SCGWPostFilter
@@ -37,7 +41,7 @@ spring:
         - id: product-service
           uri: lb://PRODUCT-SERVICE
           predicates:
-            - Path=/product-account/**
+            - Path=/product/**
           filters:
             - name: SCGWPreFilter
             - name: SCGWPostFilter
@@ -48,4 +52,3 @@ spring:
           filters:
             - name: SCGWPreFilter
             - name: SCGWPostFilter
-
