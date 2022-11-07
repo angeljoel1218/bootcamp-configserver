@@ -1,12 +1,12 @@
 server:
-  port: 9091
+  port: 7001
 eureka:
   client:
     #telling the server not to register himself in the service registry
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
-      defaultZone: http://discovery-service:9091/eureka
+      defaultZone: http://discovery-service:7001/eureka
   server:
     waitTimeInMsWhenSyncEmpty: 0    #wait time for subsequent sync
 

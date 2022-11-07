@@ -1,10 +1,10 @@
 server:
-  port: 8080
+  port: 7000
 ---
 eureka:
   client:
     service-url:
-      defaultZone: http://discovery-service:9091/eureka
+      defaultZone: http://discovery-service:7001/eureka
   instance:
     prefer-ip-address: true
     hostname: ${COMPUTERNAME:localhost}
@@ -20,7 +20,7 @@ spring:
         - id: account-service
           uri: lb://ACCOUNT-SERVICE
           predicates:
-            - Path=/current-account/**
+            - Path=/account/**
           filters:
           - name: SCGWPreFilter
           - name: SCGWPostFilter
@@ -52,3 +52,31 @@ spring:
           filters:
             - name: SCGWPreFilter
             - name: SCGWPostFilter
+        - id: card-service
+          uri: lb://CARD-SERVICE
+          predicates:
+            - Path=/card/**
+        - id: wallet-service
+          uri: lb://WALLET-SERVICE
+          predicates:
+            - Path=/wallet/**
+        - id: wallet-transaction-service
+          uri: lb://WALLET-TRANSACTION-SERVICE
+          predicates:
+            - Path=/wallet-transfer/**
+        - id: ad-bootcoin-service
+          uri: lb://AD-BOOTCOIN-SERVICE
+          predicates:
+            - Path=/ad/**
+        - id: master-data-bootcoin-service
+          uri: lb://MASTER-DATA-BOOTCOIN-SERVICE
+          predicates:
+            - Path=/data-bootcoin/**
+        - id: exchange-bootcoin-service
+          uri: lb://EXCHANGE-BOOTCOIN-SERVICE
+          predicates:
+            - Path=/exchange/**
+        - id: bootcoin-service
+          uri: lb://BOOTCOIN-SERVICE
+          predicates:
+            - Path=/bootcoin/**
